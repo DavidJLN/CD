@@ -2,6 +2,7 @@ import random
 
 
 class Minesweeper:
+    """Minesweeper game class."""
     def __init__(self, rows: int, cols: int, num_mines: int):
         self.rows = rows
         self.cols = cols
@@ -39,31 +40,37 @@ class Minesweeper:
         """
         if (row, col) in self.revealed:
             return "Continue"
-        
+
         self.revealed.add((row, col))
-        
+
         if (row, col) in self.mines:
             return "Game Over"
-        
+
         if self.board[row][col] == "":
             self.board[row][col] = 0
             for i in range(row - 1, row + 2):
                 for j in range(col - 1, col + 2):
-                    if 0 <= i < self.rows and 0 <= j < self.cols and (i, j) not in self.revealed:
+                    if (
+                        0 <= i < self.rows
+                        and 0 <= j < self.cols
+                        and (i, j) not in self.revealed
+                    ):
                         self.reveal(i, j)
                         return "Continue"
 
-       
     def get_board(self) -> list:
         """Return the current state of the board."""
-        return [[cell if (r, c) in self.revealed else "?" for c, cell in enumerate(row)] for r, row in enumerate(self.board)]
+        return [
+            [cell if (r, c) in self.revealed else "?" for c, cell in enumerate(row)]
+            for r, row in enumerate(self.board)
+        ]
 
     def is_winner(self) -> bool:
         """Check if the game has been won."""
         if len(self.revealed) == self.rows * self.cols - self.num_mines:
             return True
-        else:
-            return False
+        
+        return False
 
     def restart(self) -> None:
         """Restart the game with the same parameters."""
