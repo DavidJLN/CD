@@ -21,7 +21,7 @@ def test_get_board():
     game = minesweeper.Minesweeper(3, 3, 2)
     game.place_mines()
     game.reveal(2, 2)
-    assert game.get_board() == [['?', '?', '?'], ['?', '?', '?'], ['?', '?', 4]]
+    assert game.get_board() == [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', 4]]
     
 def test_is_winner():
     game = minesweeper.Minesweeper(3, 3, 2)

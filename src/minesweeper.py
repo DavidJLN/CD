@@ -6,6 +6,7 @@ import random
 
 import pytest
 
+
 class Minesweeper:
 
     def __init__(self, rows: int, cols: int, num_mines: int):
@@ -25,7 +26,6 @@ class Minesweeper:
         self.place_mines()
 
     def place_mines(self):
-
         """Randomly place mines on the board, updating adjacent cells with mine counts."""
 
         while len(self.mines) < self.num_mines:
@@ -45,13 +45,9 @@ class Minesweeper:
                 for j in range(c - 1, c + 2):
 
                     if (
-
                         0 <= i < self.rows
-
                         and 0 <= j < self.cols
-
                         and self.board[i][j] != "💣"
-
                     ):
 
                         if self.board[i][j] == "":
@@ -63,7 +59,6 @@ class Minesweeper:
                             self.board[i][j] += 1
 
     def reveal(self, row: int, col: int) -> str:
-
         """Reveal a cell on the board.
 
         Any adjacent cells with no mines are also revealed.
@@ -87,13 +82,9 @@ class Minesweeper:
                 for j in range(col - 1, col + 2):
 
                     if (
-
                         0 <= i < self.rows
-
                         and 0 <= j < self.cols
-
                         and (i, j) not in self.revealed
-
                     ):
 
                         self.reveal(i, j)
@@ -101,32 +92,22 @@ class Minesweeper:
         return "Continue"
 
     def get_board(self) -> list:
-
         """Return the current state of the board."""
 
         return [
-
             [
-
                 self.board[r][c] if (r, c) in self.revealed else " "
-
                 for c in range(self.cols)
-
             ]
-
             for r in range(self.rows)
-
         ]
 
     def is_winner(self) -> bool:
-
         """Check if the game has been won."""
 
         return len(self.revealed) == self.rows * self.cols - self.num_mines
 
     def restart(self) -> None:
-
         """Restart the game with the same parameters."""
 
         self.__init__(self.rows, self.cols, self.num_mines)
-
